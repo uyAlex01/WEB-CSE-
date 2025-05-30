@@ -189,265 +189,218 @@
             transform: translateY(0);
             opacity: 1;
         }
-
-        .login-prompt {
-            color: var(--neon-aqua);
-            font-size: 0.9rem;
-            margin-top: 0.5rem;
-            text-align: center;
-        }
-
-        .login-link {
-            color: var(--electric-violet);
-            text-decoration: underline;
-            font-weight: bold;
-        }
-
-        .login-link:hover {
-            color: var(--neon-aqua);
-        }
     </style>
 @endpush
 
 @section('content')
-<div class="browse-page">
-    <div class="container mx-auto px-4">
+    <div class="browse-page">
         <div class="container mx-auto px-4">
-            <!-- Centered Header -->
-            <header class="browse-header">
-                <h1 class="text-2xl md:text-3xl font-bold">Discover <span class="browse-highlight">Electric
-                        Experiences</span></h1>
-                <p class="browse-subtext mt-2">Find the hottest music events in Asia for 2025</p>
-            </header>
+            <div class="container mx-auto px-4">
+                <!-- Centered Header -->
+                <header class="browse-header">
+                    <h1 class="text-2xl md:text-3xl font-bold">Discover <span class="browse-highlight">Electric
+                            Experiences</span></h1>
+                    <p class="browse-subtext mt-2">Find the hottest music events in Asia for 2025</p>
+                </header>
 
-            <!-- Stats Cards -->
-            <div class="browse-stats">
-                <div class="browse-stat-card">
-                    <p class="text-sm text-[#999]">Events Found</p>
-                    <p class="text-xl font-bold">6</p>
-                </div>
-                <div class="browse-stat-card">
-                    <p class="text-sm text-[#999]">Countries Covered</p>
-                    <p class="text-xl font-bold">6</p>
-                </div>
-                <div class="browse-stat-card">
-                    <p class="text-sm text-[#999]">Price Range</p>
-                    <p class="text-xl font-bold">₱1,800 – ₱23,800</p>
-                </div>
-                <div class="browse-stat-card">
-                    <p class="text-sm text-[#999]">New This Year</p>
-                    <p class="text-xl font-bold">6</p>
-                </div>
-            </div>
-
-            <!-- Events Grid -->
-            <div class="browse-events-container">
-                <div class="flex justify-between items-center mb-6">
-                    <h2 class="text-xl font-semibold">Upcoming Music Events in Asia</h2>
+                <!-- Stats Cards -->
+                <div class="browse-stats">
+                    <div class="browse-stat-card">
+                        <p class="text-sm text-[#999]">Events Found</p>
+                        <p class="text-xl font-bold">6</p>
+                    </div>
+                    <div class="browse-stat-card">
+                        <p class="text-sm text-[#999]">Countries Covered</p>
+                        <p class="text-xl font-bold">6</p>
+                    </div>
+                    <div class="browse-stat-card">
+                        <p class="text-sm text-[#999]">Price Range</p>
+                        <p class="text-xl font-bold">₱1,800 – ₱23,800</p>
+                    </div>
+                    <div class="browse-stat-card">
+                        <p class="text-sm text-[#999]">New This Year</p>
+                        <p class="text-xl font-bold">6</p>
+                    </div>
                 </div>
 
-                <div class="browse-events-grid">
-                    @php
-                        $events = [
-                            [
-                                'id' => 1,
-                                'title' => 'One Love Asia 2025',
-                                'dates' => 'October 4-5, 2025',
-                                'venue' => 'The Meadows, Gardens by the Bay, Singapore',
-                                'category' => 'Festival',
-                                'price_php' => '₱8,100 - ₱23,800',
-                                'details' => 'A celebration of Asian culture, unity, and diversity featuring artists like Eric Zhou, Benjamin Kheng, and JJ Lin.',
-                                'image' => asset('images/images.jpg'),
-                            ],
-                            [
-                                'id' => 2,
-                                'title' => 'Shillong Cherry Blossom Festival',
-                                'dates' => 'November 2025 (Exact dates TBA)',
-                                'venue' => 'Shillong, Meghalaya, India',
-                                'category' => 'Festival',
-                                'price_php' => 'Free / Varies',
-                                'details' => 'Annual cultural event with performances by Akon, R3HAB, and Ne-Yo during cherry blossom season.',
-                                'image' => null,
-                            ],
-                            [
-                                'id' => 3,
-                                'title' => 'Rolling Loud Thailand 2025',
-                                'dates' => 'November 14-16, 2025',
-                                'venue' => 'TBA, Thailand',
-                                'category' => 'Hip-Hop Festival',
-                                'price_php' => '₱10,000',
-                                'details' => 'Renowned hip-hop festival featuring international and regional artists.',
-                                'image' => null,
-                            ],
-                            [
-                                'id' => 4,
-                                'title' => 'Round Festival 2025',
-                                'dates' => 'June 21-22, 2025',
-                                'venue' => 'Zepp Kuala Lumpur, Malaysia',
-                                'category' => 'Music Festival',
-                                'price_php' => '₱1,800',
-                                'details' => 'Promoting cultural exchanges between Korea and ASEAN countries through popular music.',
-                                'image' => null,
-                            ],
-                            [
-                                'id' => 5,
-                                'title' => 'Equation Festival 2025',
-                                'dates' => 'April 4-6, 2025',
-                                'venue' => 'Mo Luong Cave, Mai Chau, Vietnam',
-                                'category' => 'Electronic Music',
-                                'price_php' => 'Free / Varies',
-                                'details' => 'Immersive electronic music experience set in a stunning cave environment.',
-                                'image' => null,
-                            ],
-                            [
-                                'id' => 6,
-                                'title' => 'Nano-Mugen Festival 2025',
-                                'dates' => 'May 24-25 (Jakarta) & May 31-June 1 (Yokohama)',
-                                'venue' => 'Ecopark Ancol, Jakarta & K-Arena Yokohama, Japan',
-                                'category' => 'Rock Festival',
-                                'price_php' => '₱3,400',
-                                'details' => 'Revival of the iconic festival featuring international and local rock acts.',
-                                'image' => null,
-                            ],
-                        ];
-                    @endphp
+                <!-- Events Grid -->
+                <div class="browse-events-container">
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 class="text-xl font-semibold">Upcoming Music Events in Asia</h2>
+                    </div>
 
-                    @foreach($events as $event)
-                        <div class="browse-event-card">
-                            <div class="browse-event-img-container">
-                                @if ($event['image'])
-                                    <img src="{{ $event['image'] }}" alt="{{ $event['title'] }}" class="browse-event-img">
-                                @else
-                                    <div class="w-full h-full flex items-center justify-center bg-gray-800 text-gray-500">
-                                        <span>No Image Available</span>
-                                    </div>
-                                @endif
-                                <span class="browse-event-tag">{{ $event['category'] }}</span>
-                            </div>
-                            <div class="browse-event-content">
-                                <h3 class="browse-event-title">{{ $event['title'] }}</h3>
-                                <p class="browse-event-meta">{{ $event['dates'] }}</p>
-                                <p class="text-sm mb-3">{{ $event['details'] }}</p>
-                                <p class="text-sm text-gray-400"><strong>Venue:</strong> {{ $event['venue'] }}</p>
-                                <div class="browse-event-footer">
-                                    <span class="browse-event-price">{{ $event['price_php'] }}</span>
-                                    @auth
+                    <div class="browse-events-grid">
+                        @php
+                            $events = [
+                                [
+                                    'id' => 1,
+                                    'title' => 'One Love Asia 2025',
+                                    'dates' => 'October 4-5, 2025',
+                                    'venue' => 'The Meadows, Gardens by the Bay, Singapore',
+                                    'category' => 'Festival',
+                                    'price_php' => '₱8,100 - ₱23,800',
+                                    'details' => 'A celebration of Asian culture, unity, and diversity featuring artists like Eric Zhou, Benjamin Kheng, and JJ Lin.',
+                                    'image' => asset('images/images.jpg'),
+                                ],
+                                [
+                                    'id' => 2,
+                                    'title' => 'Shillong Cherry Blossom Festival',
+                                    'dates' => 'November 2025 (Exact dates TBA)',
+                                    'venue' => 'Shillong, Meghalaya, India',
+                                    'category' => 'Festival',
+                                    'price_php' => 'Free / Varies',
+                                    'details' => 'Annual cultural event with performances by Akon, R3HAB, and Ne-Yo during cherry blossom season.',
+                                    'image' => null,
+                                ],
+                                [
+                                    'id' => 3,
+                                    'title' => 'Rolling Loud Thailand 2025',
+                                    'dates' => 'November 14-16, 2025',
+                                    'venue' => 'TBA, Thailand',
+                                    'category' => 'Hip-Hop Festival',
+                                    'price_php' => '₱10,000',
+                                    'details' => 'Renowned hip-hop festival featuring international and regional artists.',
+                                    'image' => null,
+                                ],
+                                [
+                                    'id' => 4,
+                                    'title' => 'Round Festival 2025',
+                                    'dates' => 'June 21-22, 2025',
+                                    'venue' => 'Zepp Kuala Lumpur, Malaysia',
+                                    'category' => 'Music Festival',
+                                    'price_php' => '₱1,800',
+                                    'details' => 'Promoting cultural exchanges between Korea and ASEAN countries through popular music.',
+                                    'image' => null,
+                                ],
+                                [
+                                    'id' => 5,
+                                    'title' => 'Equation Festival 2025',
+                                    'dates' => 'April 4-6, 2025',
+                                    'venue' => 'Mo Luong Cave, Mai Chau, Vietnam',
+                                    'category' => 'Electronic Music',
+                                    'price_php' => 'Free / Varies',
+                                    'details' => 'Immersive electronic music experience set in a stunning cave environment.',
+                                    'image' => null,
+                                ],
+                                [
+                                    'id' => 6,
+                                    'title' => 'Nano-Mugen Festival 2025',
+                                    'dates' => 'May 24-25 (Jakarta) & May 31-June 1 (Yokohama)',
+                                    'venue' => 'Ecopark Ancol, Jakarta & K-Arena Yokohama, Japan',
+                                    'category' => 'Rock Festival',
+                                    'price_php' => '₱3,400',
+                                    'details' => 'Revival of the iconic festival featuring international and local rock acts.',
+                                    'image' => null,
+                                ],
+                            ];
+                        @endphp
+
+                        @foreach($events as $event)
+                            <div class="browse-event-card">
+                                <div class="browse-event-img-container">
+                                    @if ($event['image'])
+                                        <img src="{{ $event['image'] }}" alt="{{ $event['title'] }}" class="browse-event-img">
+                                    @else
+                                        <div class="w-full h-full flex items-center justify-center bg-gray-800 text-gray-500">
+                                            <span>No Image Available</span>
+                                        </div>
+                                    @endif
+                                    <span class="browse-event-tag">{{ $event['category'] }}</span>
+                                </div>
+                                <div class="browse-event-content">
+                                    <h3 class="browse-event-title">{{ $event['title'] }}</h3>
+                                    <p class="browse-event-meta">{{ $event['dates'] }}</p>
+                                    <p class="text-sm mb-3">{{ $event['details'] }}</p>
+                                    <p class="text-sm text-gray-400"><strong>Venue:</strong> {{ $event['venue'] }}</p>
+                                    <div class="browse-event-footer">
+                                        <span class="browse-event-price">{{ $event['price_php'] }}</span>
                                         <button class="browse-event-button add-to-cart" data-event-id="{{ $event['id'] }}"
                                             data-event-title="{{ $event['title'] }}"
                                             data-event-price="{{ $event['price_php'] }}">
                                             Add to Cart
                                         </button>
-                                    @else
-                                        <div class="login-prompt">
-                                            <a href="{{ route('login') }}" class="login-link">Login</a> to purchase tickets
-                                        </div>
-                                    @endauth
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    @endforeach
+                        @endforeach
+                    </div>
                 </div>
             </div>
+        </div>
+    </div>
 
-            <!-- Toast Notification -->
-            <div class="toast-notification" id="toastNotification">
-                Event added to cart!
-            </div>
+    <!-- Toast Notification -->
+    <div class="toast-notification" id="toastNotification">
+        Event added to cart!
+    </div>
+@endsection
 
-            @push('scripts')
-                        <script>
-                            document.addEventListener('DOMContentLoaded', function () {
-                                // Only initialize cart functionality if user is logged in
-                                @auth
-                                    // Add to cart functionality
-                                    const addToCartButtons = document.querySelectorAll('.add-to-cart');
-                                            const toastNotification = document.getElementById('toastNotification');
+@push('scripts')
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Add to cart functionality
+            const addToCartButtons = document.querySelectorAll('.add-to-cart');
+            const toastNotification = document.getElementById('toastNotification');
 
-                                            // Cart items array (in a real app, this would be managed by your backend)
-                                            let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+            // Cart items array (in a real app, this would be managed by your backend)
+            let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
 
-                                            addToCartButtons.forEach(button => {
-                                                button.addEventListener('click', function () {
-                                                    const eventId = this.getAttribute('data-event-id');
-                                                    const eventTitle = this.getAttribute('data-event-title');
-                                                    const eventPrice = this.getAttribute('data-event-price');
+            addToCartButtons.forEach(button => {
+                button.addEventListener('click', function () {
+                    const eventId = this.getAttribute('data-event-id');
+                    const eventTitle = this.getAttribute('data-event-title');
+                    const eventPrice = this.getAttribute('data-event-price');
 
-                                                    // Check if item is already in cart
-                                                    const existingItem = cartItems.find(item => item.id === eventId);
+                    // Check if item is already in cart
+                    const existingItem = cartItems.find(item => item.id === eventId);
 
-                                                    if (!existingItem) {
-                                                        // Add to cart
-                                                        cartItems.push({
-                                                            id: eventId,
-                                                            title: eventTitle,
-                                                            price: eventPrice,
-                                                            quantity: 1
-                                                        });
+                    if (!existingItem) {
+                        // Add to cart
+                        cartItems.push({
+                            id: eventId,
+                            title: eventTitle,
+                            price: eventPrice,
+                            quantity: 1
+                        });
 
-                                                        // Update localStorage
-                                                        localStorage.setItem('cartItems', JSON.stringify(cartItems));
+                        // Update localStorage
+                        localStorage.setItem('cartItems', JSON.stringify(cartItems));
 
-                                                        // Update button state
-                                                        this.textContent = 'Added to Cart';
-                                                        this.classList.add('added');
+                        // Update button state
+                        this.textContent = 'Added to Cart';
+                        this.classList.add('added');
 
-                                                        // Show notification
-                                                        showToast('Event added to cart!');
+                        // Show notification
+                        showToast('Event added to cart!');
 
-                                                        // Update cart count in navbar (if exists)
-                                                        updateCartCount();
-
-                                                        // In a real app, you would make an AJAX call to your backend here
-                                                        // addToCartOnServer(eventId);
-                                                    } else {
-                                                        showToast('This event is already in your cart');
-                                                    }
-                                                });
-                                            });
-
-                                            // Function to show toast notification
-                                            function showToast(message) {
-                                                toastNotification.textContent = message;
-                                                toastNotification.classList.add('show');
-
-                                                setTimeout(() => {
-                                                    toastNotification.classList.remove('show');
-                                                }, 3000);
-                                            }
-
-                                            // Function to update cart count in navbar
-                                            function updateCartCount() {
-                                                const cartBadge = document.querySelector('.cart-badge');
-                                                if (cartBadge) {
-                                                    cartBadge.textContent = cartItems.length;
-                                                }
-                                            }
-
-                                            // Initialize cart count on page load
-                                            updateCartCount();
-
-                                            // Example function for adding to cart on server (would be implemented in your app)
-                                            function addToCartOnServer(eventId) {
-                                                fetch('/cart/add', {
-                                                    method: 'POST',
-                                                    headers: {
-                                                        'Content-Type': 'application/json',
-                                                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
-                                                    },
-                                                    body: JSON.stringify({ event_id: eventId })
-                                                })
-                                                    .then(response => response.json())
-                                                    .then(data => {
-                                                        if (!data.success) {
-                                                            showToast('Error adding to cart: ' + data.message);
-                                                        }
-                                                    })
-                                                    .catch(error => {
-                                                        showToast('Error adding to cart');
-                                                        console.error('Error:', error);
-                                                    });
-                                            }
-                                @endauth
+                        // Update cart count in navbar (if exists)
+                        updateCartCount();
+                    } else {
+                        showToast('This event is already in your cart');
+                    }
                 });
-                        </script>
-            @endpush
+            });
+
+            // Function to show toast notification
+            function showToast(message) {
+                toastNotification.textContent = message;
+                toastNotification.classList.add('show');
+
+                setTimeout(() => {
+                    toastNotification.classList.remove('show');
+                }, 3000);
+            }
+
+            // Function to update cart count in navbar
+            function updateCartCount() {
+                const cartBadge = document.querySelector('.cart-badge');
+                if (cartBadge) {
+                    cartBadge.textContent = cartItems.length;
+                }
+            }
+
+            // Initialize cart count on page load
+            updateCartCount();
+        });
+    </script>
+@endpush

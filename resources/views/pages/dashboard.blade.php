@@ -794,7 +794,8 @@
                 <div class="ticket-list">
                     @forelse($upcomingTickets as $ticket)
                             <div onclick="window.location.href='{{ route('tickets.show', ['ticket' => $ticket['id']]) }}'>
-                                                                            <div class=" ticket-image">{{ $ticket['icon'] }}</div>
+                                                                                        <div class=" ticket-image">
+                                {{ $ticket['icon'] }}</div>
                             <div class="ticket-info">
                                 <h4 class="ticket-title">{{ $ticket['event'] }}</h4>
                                 <div class="ticket-date">{{ \Carbon\Carbon::parse($ticket['date'])->format('l, F j, Y') }}</div>
@@ -864,6 +865,7 @@
             </div>
         </div>
     </div>
+
 
     {{-- Recommendations --}}
     <section class="recommendations-section">

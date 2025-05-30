@@ -701,7 +701,7 @@
                         </ul>
 
                         <button class="card-button button-outline">
-                            Get Started
+                            Subscribe
                         </button>
                     </div>
                 </div>
@@ -760,7 +760,7 @@
                         </ul>
 
                         <button class="card-button button-solid">
-                            Get Started
+                            Subscribe
                         </button>
                     </div>
                 </div>
