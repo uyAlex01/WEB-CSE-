@@ -38,13 +38,6 @@
         </li>
 
         <li class="nav-item">
-          <a class="nav-link {{ Route::is('organize') ? 'active' : '' }}" href="{{ route('organize') }}"
-            style="color: #00F6FF;">
-            <i class="bi bi-plus-circle me-1"></i> Organize
-          </a>
-        </li>
-
-        <li class="nav-item">
           <a class="nav-link {{ Route::is('pricing') ? 'active' : '' }}" href="{{ route('pricing') }}"
             style="color: #00F6FF;">
             <i class="bi bi-tags me-1"></i> Pricing

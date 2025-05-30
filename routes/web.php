@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\CategoryController;
@@ -43,24 +44,23 @@ Route::controller(PageController::class)->group(function () {
 
 /*
 |--------------------------------------------------------------------------
-| Category Routes
-|--------------------------------------------------------------------------
-*/
-Route::controller(CategoryController::class)->group(function () {
-    Route::get('/categories', 'index')->name('categories.index');
-    Route::get('/category/{category:slug}', 'show')->name('category.show');
-});
-
-/*
-|--------------------------------------------------------------------------
-| Event Routes
+| Public Event Routes
 |--------------------------------------------------------------------------
 */
 Route::controller(EventController::class)->group(function () {
     Route::get('/browse', 'browse')->name('events.browse');
     Route::get('/events/{event}', 'show')->name('events.show');
-    Route::get('/events/upcoming', 'upcoming')->name('events.upcoming');
-    Route::get('/events/attended', 'attended')->name('events.attended');
+    Route::get('/search', 'search')->name('events.search');
+});
+
+/*
+|--------------------------------------------------------------------------
+| Public Category Routes
+|--------------------------------------------------------------------------
+*/
+Route::controller(CategoryController::class)->group(function () {
+    Route::get('/categories', 'index')->name('categories.index');
+    Route::get('/category/{category:slug}', 'show')->name('category.show');
 });
 
 /*
@@ -72,11 +72,18 @@ Route::middleware('auth')->group(function () {
     // Dashboard
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     
+    // Event Routes
+    Route::controller(EventController::class)->group(function () {
+        Route::get('/events/upcoming', 'upcoming')->name('events.upcoming');
+        Route::get('/events/attended', 'attended')->name('events.attended');
+    });
+    
     // Cart Routes
     Route::prefix('cart')->controller(CartController::class)->group(function () {
         Route::get('/', 'viewCart')->name('cart.view');
-        Route::post('/add/{event}', 'addToCart')->name('cart.add');
-        Route::post('/remove/{event}', 'removeFromCart')->name('cart.remove');
+        Route::post('/add', 'addToCart')->name('cart.add');
+        Route::post('/remove/{id}', 'removeFromCart')->name('cart.remove');
+        Route::post('/update/{id}', 'updateCart')->name('cart.update');
         Route::post('/clear', 'clearCart')->name('cart.clear');
     });
     
@@ -103,16 +110,32 @@ Route::middleware('auth')->group(function () {
     Route::prefix('api')->group(function () {
         Route::get('/dashboard-stats', [DashboardController::class, 'getStats'])->name('api.dashboard.stats');
     });
+});
 
-    // routes/web.php
-Route::controller(CategoryController::class)->group(function () {
-    Route::get('/categories', 'index')->name('categories.index');
-    Route::get('/category/{category:slug}', 'show')->name('category.show');
+/*
+|--------------------------------------------------------------------------
+| Public API Routes
+|--------------------------------------------------------------------------
+*/
+Route::get('/cart/count', function() {
+    return response()->json([
+        'count' => Auth::check() ? Auth::user()->cartItems()->count() : 0
+    ]);
 });
-    Route::controller(EventController::class)->group(function () {
-        Route::get('/browse', 'browse')->name('events.browse');
-        Route::get('/events/{event}', 'show')->name('events.show');
-        Route::get('/events/upcoming', 'upcoming')->name('events.upcoming');
-        Route::get('/events/attended', 'attended')->name('events.attended');
-    });
+
+// Temporary debug route (add to routes/web.php)
+Route::get('/debug-cart', function() {
+    dd([
+        'Session Cart' => session()->get('cart'),
+        'DB Cart (Auth)' => Auth::check() ? Auth::user()->carts : null,
+        'Event Data' => Event::first() // Verify event exists
+    ]);
 });
+
+Route::patch('/cart/update/{eventId}', [CartController::class, 'updateQuantity']);
+
+// Show cart page
+Route::get('/cart', [CartController::class, 'viewCart'])->name('cart.view');
+
+// Add to cart (POST)
+Route::post('/add-to-cart', [CartController::class, 'addToCart'])->name('cart.add');
