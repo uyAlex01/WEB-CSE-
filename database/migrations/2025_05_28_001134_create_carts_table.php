@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         // database/migrations/YYYY_MM_DD_create_carts_table.php
-Schema::create('carts', function (Blueprint $table) {
+Schema::create('cart', function (Blueprint $table) {
     $table->id();
     $table->foreignId('user_id')->constrained()->onDelete('cascade');
     $table->foreignId('event_id')->constrained()->onDelete('cascade');
