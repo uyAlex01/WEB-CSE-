@@ -14,7 +14,10 @@ class Event extends Model
         'price', 'image_url', 'category_id'
     ];
 
-    protected $dates = ['date'];
+    protected $casts = [
+        'date' => 'datetime',
+        'price' => 'decimal:2'
+    ];
 
     // Relationships
     public function category()
@@ -25,6 +28,11 @@ class Event extends Model
     public function tickets()
     {
         return $this->hasMany(Ticket::class);
+    }
+
+    public function carts()
+    {
+        return $this->hasMany(Cart::class);
     }
 
     // Scopes
@@ -46,5 +54,11 @@ class Event extends Model
             })
             ->orderBy('date')
             ->limit(4);
+    }
+
+    // Helper method to check if event is available for booking
+    public function isAvailable()
+    {
+        return $this->date > now();
     }
 }

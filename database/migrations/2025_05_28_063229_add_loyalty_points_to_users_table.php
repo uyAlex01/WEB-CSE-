@@ -11,12 +11,16 @@ return new class extends Migration
      *
      * @return void
      */
-    public function up()
-    {
+public function up()
+{
+    if (!Schema::hasColumn('users', 'loyalty_points')) {
         Schema::table('users', function (Blueprint $table) {
-    $table->integer('loyalty_points')->default(0)->after('remember_token');
-});
+            $table->integer('loyalty_points')->default(0)->after('remember_token');
+        });
     }
+}
+
+
 
     /**
      * Reverse the migrations.

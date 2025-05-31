@@ -36,5 +36,12 @@ class DatabaseSeeder extends Seeder
             CategoriesTableSeeder::class,
             // Add other seeders here
         ]);
+    
+    $this->call([
+    AdminSeeder::class,
+    CategoriesTableSeeder::class,
+    CartSeeder::class, // ✅ Add this
+]);
+
 }
 }

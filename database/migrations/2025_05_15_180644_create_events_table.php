@@ -20,6 +20,7 @@ return new class extends Migration
         $table->string('venue');
         $table->string('city');
         $table->dateTime('date');
+        $table->string('location');  // <- This might be missing
         $table->decimal('price', 8, 2);
         $table->string('status')->default('upcoming'); // upcoming, cancelled, finished
         $table->string('category')->nullable(); // pop, rock, etc.

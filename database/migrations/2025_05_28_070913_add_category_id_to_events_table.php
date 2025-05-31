@@ -11,12 +11,15 @@ return new class extends Migration
      *
      * @return void
      */
-    public function up()
-    {
-       Schema::table('events', function (Blueprint $table) {
-    $table->foreignId('category_id')->nullable()->constrained()->onDelete('set null');
-});
+public function up()
+{
+    if (!Schema::hasColumn('events', 'category_id')) {
+        Schema::table('events', function (Blueprint $table) {
+            $table->foreignId('category_id')->nullable()->constrained()->onDelete('set null');
+        });
     }
+}
+
 
     /**
      * Reverse the migrations.

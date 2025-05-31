@@ -11,17 +11,15 @@ return new class extends Migration
      *
      * @return void
      */
-    public function up()
-    {
-        Schema::create('wishlists', function (Blueprint $table) {
-    $table->id();
-    $table->foreignId('user_id')->constrained()->cascadeOnDelete();
-    $table->foreignId('event_id')->constrained()->cascadeOnDelete();
-    $table->timestamps();
-    
-    $table->unique(['user_id', 'event_id']);
-});
+  public function up()
+{
+    if (!Schema::hasColumn('users', 'loyalty_points')) {
+        Schema::table('users', function (Blueprint $table) {
+            $table->integer('loyalty_points')->default(0)->after('remember_token');
+        });
     }
+}
+
 
     /**
      * Reverse the migrations.
@@ -29,7 +27,12 @@ return new class extends Migration
      * @return void
      */
     public function down()
-    {
-        Schema::dropIfExists('wishlists');
+{
+    if (Schema::hasColumn('users', 'loyalty_points')) {
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropColumn('loyalty_points');
+        });
     }
+}
+
 };
