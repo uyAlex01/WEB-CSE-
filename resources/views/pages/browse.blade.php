@@ -2,26 +2,43 @@
 
 @push('styles')
     <style>
-        /* Rhythmx Color Palette */
+        /* === Color Variables === */
         :root {
             --electric-violet: #8F00FF;
-            /* Primary brand color */
-            --jet-black: #121212;
-            /* Background and dark elements */
             --neon-aqua: #00F6FF;
-            /* Highlights and CTAs */
-            --platinum-gray: #E5E5E5;
-            /* Body text and light UI */
             --sunset-coral: #FF4F81;
-            /* Accent color */
+            --jet-black: #121212;
+            --platinum-gray: #E5E5E5;
             --jet-black-light: rgba(30, 30, 30, 0.8);
-            /* Slightly lighter dark background */
+
+            /* Dark Mode (Default) */
+            --background-color: #121212;
+            --text-color: #E5E5E5;
+            --primary-button: #B266FF;
+            --hover-color: #00F6FF;
+            --secondary-text: #999999;
+            --accent-color: #FF7A9D;
+            --card-background: rgba(30, 30, 30, 0.8);
+            --border-color: rgba(255, 255, 255, 0.1);
+            --shadow-hover: rgba(0, 246, 255, 0.1);
         }
 
-        /* Base Styles */
+        [data-theme="light"] {
+            --background-color: #FFFFFF;
+            --text-color: #121212;
+            --primary-button: #8F00FF;
+            --hover-color: #00F6FF;
+            --secondary-text: #666666;
+            --accent-color: #FF4F81;
+            --card-background: #f5f5f5;
+            --border-color: rgba(0, 0, 0, 0.1);
+            --shadow-hover: rgba(0, 246, 255, 0.05);
+        }
+
+        /* === Base Styles === */
         body {
-            background: var(--jet-black);
-            color: var(--platinum-gray);
+            background: var(--background-color);
+            color: var(--text-color);
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             margin: 0;
             padding: 0;
@@ -29,12 +46,11 @@
         }
 
         .browse-page {
-            background: var(--jet-black);
+            background: var(--background-color);
             padding: 5rem 0;
             min-height: 100vh;
         }
 
-        /* Header */
         .browse-header {
             text-align: center;
             margin-bottom: 2rem;
@@ -42,14 +58,13 @@
         }
 
         .browse-highlight {
-            color: var(--electric-violet);
+            color: var(--primary-button);
         }
 
         .browse-subtext {
-            color: rgba(229, 229, 229, 0.8);
+            color: var(--secondary-text);
         }
 
-        /* Stats Cards */
         .browse-stats {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
@@ -58,23 +73,22 @@
         }
 
         .browse-stat-card {
-            background: var(--jet-black-light);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: var(--card-background);
+            border: 1px solid var(--border-color);
             padding: 1rem;
             border-radius: 1rem;
             transition: all 0.3s ease;
         }
 
         .browse-stat-card:hover {
-            border-color: var(--electric-violet);
+            border-color: var(--primary-button);
         }
 
-        /* Filter Container */
         .filter-container {
-            background: var(--jet-black-light);
+            background: var(--card-background);
             padding: 1.5rem;
             border-radius: 1rem;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--border-color);
             margin-bottom: 1.5rem;
             display: flex;
             justify-content: space-between;
@@ -95,24 +109,21 @@
         }
 
         .filter-control {
-            background: var(--jet-black-light);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: var(--platinum-gray);
+            background: var(--card-background);
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
             padding: 0.5rem 2.5rem 0.5rem 1rem;
             border-radius: 0.5rem;
             width: 100%;
             font-size: 0.875rem;
-            transition: all 0.3s ease;
             appearance: none;
             cursor: pointer;
+            transition: all 0.3s ease;
         }
 
-        .filter-control:hover {
-            border-color: var(--electric-violet);
-        }
-
+        .filter-control:hover,
         .filter-control:focus {
-            border-color: var(--electric-violet);
+            border-color: var(--primary-button);
             outline: none;
             box-shadow: 0 0 0 2px rgba(143, 0, 255, 0.3);
         }
@@ -123,16 +134,15 @@
             top: 50%;
             transform: translateY(-50%);
             pointer-events: none;
-            color: var(--platinum-gray);
+            color: var(--secondary-text);
             opacity: 0.7;
         }
 
-        /* Events Container */
         .browse-events-container {
-            background: var(--jet-black-light);
+            background: var(--card-background);
             padding: 1.5rem;
             border-radius: 1rem;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--border-color);
         }
 
         .browse-events-grid {
@@ -142,19 +152,18 @@
             margin-top: 1.5rem;
         }
 
-        /* Event Cards */
         .browse-event-card {
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: var(--background-color);
+            border: 1px solid var(--border-color);
             border-radius: 1rem;
             overflow: hidden;
             transition: all 0.3s ease;
-            background: var(--jet-black);
         }
 
         .browse-event-card:hover {
-            border-color: var(--neon-aqua);
+            border-color: var(--hover-color);
             transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 246, 255, 0.1);
+            box-shadow: 0 10px 20px var(--shadow-hover);
         }
 
         .browse-event-img-container {
@@ -178,7 +187,7 @@
             position: absolute;
             bottom: 0.5rem;
             left: 0.5rem;
-            background: var(--electric-violet);
+            background: var(--primary-button);
             color: white;
             font-size: 0.75rem;
             padding: 0.25rem 0.5rem;
@@ -194,15 +203,15 @@
             font-weight: bold;
             margin-bottom: 0.5rem;
             transition: color 0.3s;
-            color: var(--platinum-gray);
+            color: var(--text-color);
         }
 
         .browse-event-card:hover .browse-event-title {
-            color: var(--neon-aqua);
+            color: var(--hover-color);
         }
 
         .browse-event-meta {
-            color: rgba(229, 229, 229, 0.7);
+            color: var(--secondary-text);
             font-size: 0.875rem;
             margin-bottom: 0.75rem;
         }
@@ -215,51 +224,49 @@
         }
 
         .browse-event-price {
-            color: var(--neon-aqua);
+            color: var(--hover-color);
             font-weight: bold;
         }
 
         .browse-event-button {
-            background: var(--electric-violet);
+            background: var(--primary-button);
             color: white;
             padding: 0.5rem 1rem;
             border-radius: 0.5rem;
             font-size: 0.875rem;
-            transition: all 0.3s;
+            font-weight: bold;
             border: none;
             cursor: pointer;
-            font-weight: bold;
+            transition: all 0.3s;
         }
 
         .browse-event-button:hover {
-            background: #7A00D9;
+            background: var(--hover-color);
             transform: scale(1.05);
-            box-shadow: 0 0 15px rgba(143, 0, 255, 0.5);
+            box-shadow: 0 0 15px var(--hover-color);
         }
 
         .browse-event-button.added {
-            background: var(--neon-aqua);
-            color: var(--jet-black);
+            background: var(--hover-color);
+            color: var(--background-color);
         }
 
-        /* Month Separator */
         .month-separator {
             grid-column: 1 / -1;
             margin: 2rem 0 1rem;
             padding-bottom: 0.5rem;
-            border-bottom: 2px solid var(--electric-violet);
+            border-bottom: 2px solid var(--primary-button);
             font-size: 1.25rem;
             font-weight: bold;
-            color: var(--platinum-gray);
-            text-shadow: 0 0 10px rgba(143, 0, 255, 0.3);
+            color: var(--text-color);
+            text-shadow: 0 0 10px var(--primary-button);
         }
 
-        /* Toast Notification */
         .toast-notification {
             position: fixed;
             bottom: 20px;
             right: 20px;
-            background: var(--electric-violet);
+            background: var(--primary-button);
             color: white;
             padding: 12px 24px;
             border-radius: 8px;
@@ -276,26 +283,24 @@
             opacity: 1;
         }
 
-        /* Login Prompt */
         .login-prompt {
-            color: var(--neon-aqua);
+            color: var(--hover-color);
             font-size: 0.9rem;
             margin-top: 0.5rem;
             text-align: center;
         }
 
         .login-link {
-            color: var(--electric-violet);
+            color: var(--primary-button);
             text-decoration: underline;
             font-weight: bold;
             transition: color 0.3s;
         }
 
         .login-link:hover {
-            color: var(--neon-aqua);
+            color: var(--hover-color);
         }
 
-        /* Responsive Adjustments */
         @media (max-width: 768px) {
             .filter-container {
                 flex-direction: column;
@@ -311,201 +316,155 @@
             .filter-group {
                 width: 100%;
             }
-        }
 
-
-        /* Modal Styles - Rhythmx Themed */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(18, 18, 18, 0.95);
-            /* Jet Black with transparency */
-            backdrop-filter: blur(5px);
-        }
-
-        .modal-content {
-            background: #1a1a1a;
-            /* Slightly lighter than Jet Black for depth */
-            margin: 10% auto;
-            padding: 2rem;
-            border-radius: 1rem;
-            width: 90%;
-            max-width: 400px;
-            border: 1px solid rgba(143, 0, 255, 0.3);
-            /* Electric Violet border */
-            box-shadow: 0 0 30px rgba(143, 0, 255, 0.2);
-            position: relative;
-        }
-
-        .close-modal {
-            position: absolute;
-            right: 1.5rem;
-            top: 1.5rem;
-            color: #E5E5E5;
-            /* Platinum Gray */
-            font-size: 1.5rem;
-            cursor: pointer;
-            opacity: 0.7;
-            transition: all 0.3s ease;
-        }
-
-        .close-modal:hover {
-            color: #00F6FF;
-            /* Neon Aqua */
-            opacity: 1;
-        }
-
-        .modal-header {
-            margin-bottom: 1.5rem;
-            border-bottom: 1px solid rgba(229, 229, 229, 0.1);
-            /* Platinum Gray subtle divider */
-            padding-bottom: 1rem;
-        }
-
-        .modal-title {
-            color: #00F6FF;
-            /* Neon Aqua */
-            font-size: 1.25rem;
-            font-weight: bold;
-            margin-bottom: 0.5rem;
-        }
-
-        .modal-subtitle {
-            color: #E5E5E5;
-            /* Platinum Gray */
-            font-size: 0.9rem;
-            opacity: 0.8;
-        }
-
-        .modal-price {
-            color: #8F00FF;
-            /* Electric Violet */
-            font-weight: bold;
-            margin-top: 0.5rem;
-        }
-
-        .ticket-control {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 1.5rem;
-            padding: 1rem;
-            background: #121212;
-            /* Jet Black */
-            border: 1px solid rgba(143, 0, 255, 0.2);
-            /* Electric Violet */
-            border-radius: 0.5rem;
-        }
-
-        .ticket-label {
-            color: #E5E5E5;
-            /* Platinum Gray */
-            font-weight: 500;
-        }
-
-        .quantity-controls {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .quantity-btn {
-            width: 2rem;
-            height: 2rem;
-            border-radius: 50%;
-            background: #8F00FF;
-            /* Electric Violet */
-            color: white;
-            border: none;
-            font-size: 1rem;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s ease;
-        }
-
-        .quantity-btn:hover {
-            background: #7A00D9;
-            /* Darker Electric Violet */
-            transform: scale(1.1);
-            box-shadow: 0 0 10px rgba(143, 0, 255, 0.5);
-        }
-
-        .quantity-display {
-            width: 3rem;
-            text-align: center;
-            font-size: 1rem;
-            color: #E5E5E5;
-            /* Platinum Gray */
-            background: transparent;
-            border: none;
-        }
-
-        .modal-actions {
-            display: flex;
-            gap: 1rem;
-            margin-top: 2rem;
-        }
-
-        .modal-btn {
-            flex: 1;
-            padding: 0.75rem;
-            border-radius: 0.5rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-align: center;
-            font-size: 0.9rem;
-        }
-
-        .modal-btn-cancel {
-            background: transparent;
-            border: 1px solid #FF4F81;
-            /* Sunset Coral */
-            color: #FF4F81;
-            /* Sunset Coral */
-        }
-
-        .modal-btn-cancel:hover {
-            background: rgba(255, 79, 129, 0.1);
-            border-color: #FF4F81;
-            /* Sunset Coral */
-        }
-
-        .modal-btn-submit {
-            background: #8F00FF;
-            /* Electric Violet */
-            border: none;
-            color: white;
-        }
-
-        .modal-btn-submit:hover {
-            background: #7A00D9;
-            box-shadow: 0 0 15px rgba(143, 0, 255, 0.5);
-        }
-
-        /* Animation */
-        @keyframes modalPulse {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
+            /* Modal Styles with Enhanced Contrast */
+            .modal {
+                display: none;
+                position: fixed;
+                z-index: 1000;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.85);
             }
 
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+            .modal-content {
+                margin: 10% auto;
+                padding: 2rem;
+                border-radius: 1rem;
+                width: 90%;
+                max-width: 400px;
+                position: relative;
 
-        .modal-content {
-            animation: modalPulse 0.3s ease-out forwards;
-        }
+                /* Light Mode */
+                background: #FFFFFF;
+                border: 1px solid #E0E0E0;
+                box-shadow: 0 4px 25px rgba(0, 0, 0, 0.15);
+            }
+
+            /* Dark Mode */
+            @media (prefers-color-scheme: dark) {
+                .modal-content {
+                    background: #121212;
+                    border: 1px solid #333333;
+                    box-shadow: 0 4px 25px rgba(0, 0, 0, 0.4);
+                }
+            }
+
+            /* Enhanced Text Contrast */
+            .modal-header {
+                margin-bottom: 1.5rem;
+                padding-bottom: 1rem;
+                border-bottom: 1px solid;
+
+                /* Light Mode */
+                border-color: #E0E0E0;
+            }
+
+            .modal-title {
+                font-size: 1.4rem;
+                font-weight: 700;
+                line-height: 1.3;
+                margin-bottom: 0.75rem;
+
+                /* Light Mode */
+                color: #121212;
+                /* Jet Black - Maximum contrast */
+            }
+
+            .modal-subtitle {
+                font-size: 0.95rem;
+                margin-bottom: 0.5rem;
+
+                /* Light Mode */
+                color: #444444;
+                /* Darker gray for better visibility */
+            }
+
+            .modal-price {
+                font-size: 1rem;
+                font-weight: 600;
+                margin: 0.75rem 0;
+
+                /* Light Mode */
+                color: #8F00FF;
+                /* Electric Violet */
+            }
+
+            .event-category {
+                display: inline-block;
+                padding: 0.25rem 0.75rem;
+                border-radius: 1rem;
+                font-size: 0.8rem;
+                font-weight: 600;
+                margin-top: 0.5rem;
+
+                /* Light Mode */
+                background: rgba(143, 0, 255, 0.1);
+                color: #8F00FF;
+            }
+
+            /* Dark Mode Text Adjustments */
+            @media (prefers-color-scheme: dark) {
+                .modal-header {
+                    border-color: #333333;
+                }
+
+                .modal-title {
+                    color: #F5F5F5;
+                    /* Brighter than Platinum Gray */
+                }
+
+                .modal-subtitle {
+                    color: #CCCCCC;
+                    /* Lighter secondary text */
+                }
+
+                .modal-price {
+                    color: #B266FF;
+                    /* Softer Electric Violet */
+                }
+
+                .event-category {
+                    background: rgba(178, 102, 255, 0.15);
+                    color: #B266FF;
+                }
+            }
+
+            /* Quantity Control - Enhanced Visibility */
+            .ticket-control {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                margin: 1.5rem 0;
+                padding: 1.25rem;
+                border-radius: 0.75rem;
+
+                /* Light Mode */
+                background: #F5F5F5;
+                border: 1px solid #E0E0E0;
+            }
+
+            .ticket-label {
+                font-weight: 600;
+                font-size: 1rem;
+
+                /* Light Mode */
+                color: #121212;
+            }
+
+            /* Dark Mode Quantity Control */
+            @media (prefers-color-scheme: dark) {
+                .ticket-control {
+                    background: #1A1A1A;
+                    border: 1px solid #333333;
+                }
+
+                .ticket-label {
+                    color: #E5E5E5;
+                }
+            }
     </style>
 @endpush
 
@@ -1115,6 +1074,7 @@
                 // Also update when window is resized (in case of responsive changes)
                 window.addEventListener('resize', updateStats);
             });
+
         </script>
     @endpush
 @endsection

@@ -794,7 +794,7 @@
                 <div class="ticket-list">
                     @forelse($upcomingTickets as $ticket)
                             <div onclick="window.location.href='{{ route('tickets.show', ['ticket' => $ticket['id']]) }}'>
-                                                                                                                                        <div class="
+                                                                                                                                                                            <div class="
                                 ticket-image">
                                 {{ $ticket['icon'] }}
                             </div>
@@ -827,7 +827,7 @@
                     <a href="{{ route('events.browse') }}" class="action-btn">
                         🔍 Browse Events
                     </a>
-                    <a href="{{ route('cart') }}" class="action-btn">
+                    <a href="{{ route('cart.view') }}" class="action-btn">
                         🛒 View Cart
                         @if($cartCount > 0)
                             <span class="notification-badge">{{ $cartCount }}</span>
