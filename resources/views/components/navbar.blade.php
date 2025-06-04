@@ -1,4 +1,3 @@
-<!-- resources/views/components/navbar.blade.php -->
 <nav class="navbar navbar-expand-lg fixed-top py-2"
   style="background-color: rgba(15, 15, 15, 0.85); backdrop-filter: blur(10px);">
   <div class="container-fluid">
@@ -6,7 +5,7 @@
     <div class="d-flex align-items-center">
       <a class="navbar-brand d-flex align-items-center me-3"
         href="{{ auth()->user() ? route('dashboard') : route('home') }}" style="color: #00F6FF;">
-        <img src="{{ asset('images/Untitled_design.svg') }}" alt="RHYTMX Logo" class="navbar-logo">
+        <img src="{{ asset('images/Rhytmx.png') }}" class="navbar-logo">
         <span class="fw-bold ms-2 brand-text">RHYTMX</span>
       </a>
     </div>
@@ -36,7 +35,7 @@
 
         <li class="nav-item">
           <a class="nav-link {{ Route::is('pricing') ? 'active' : '' }}" href="{{ route('pricing') }}">
-            <i class="bi bi-tags me-1"></i> Pricing
+            <i class="bi bi-tags me-1"></i> Subscription
           </a>
         </li>
 
@@ -63,11 +62,11 @@
           @auth
         <!-- Cart icon -->
         <li class="nav-item me-2">
-        <a class="nav-link position-relative {{ Route::is('cart.view') ? 'active' : '' }}"
+        <a class="nav-link position-relative {{ Route::is('cart') ? 'active' : '' }}"
           href="{{ route('cart.view') }}">
           <i class="bi bi-cart3 fs-5"></i>
           <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill cart-badge">
-          3
+          {{ count(session('cart', [])) }}
           <span class="visually-hidden">items in cart</span>
           </span>
         </a>
@@ -185,17 +184,27 @@
     text-shadow: 0 0 8px rgba(0, 246, 255, 0.5);
   }
 
-  /* Search Styles */
+  /* Search Styles - Updated for transparent background */
   .search-input {
-    background-color: rgba(255, 255, 255, 0.1) !important;
+    background-color: transparent !important;
     color: white !important;
-    border-color: #8F00FF !important;
+    border: 1px solid #8F00FF !important;
     min-width: 200px;
   }
 
+  .search-input:focus {
+    box-shadow: 0 0 0 0.25rem rgba(143, 0, 255, 0.25) !important;
+  }
+
   .search-btn {
-    background-color: #8F00FF !important;
+    background-color: transparent !important;
     color: white !important;
+    border: 1px solid #8F00FF !important;
+    border-left: none !important;
+  }
+
+  .search-btn:hover {
+    background-color: rgba(143, 0, 255, 0.2) !important;
   }
 
   /* Badge Styles */

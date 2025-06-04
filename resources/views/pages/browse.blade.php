@@ -312,6 +312,200 @@
                 width: 100%;
             }
         }
+
+
+        /* Modal Styles - Rhythmx Themed */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(18, 18, 18, 0.95);
+            /* Jet Black with transparency */
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background: #1a1a1a;
+            /* Slightly lighter than Jet Black for depth */
+            margin: 10% auto;
+            padding: 2rem;
+            border-radius: 1rem;
+            width: 90%;
+            max-width: 400px;
+            border: 1px solid rgba(143, 0, 255, 0.3);
+            /* Electric Violet border */
+            box-shadow: 0 0 30px rgba(143, 0, 255, 0.2);
+            position: relative;
+        }
+
+        .close-modal {
+            position: absolute;
+            right: 1.5rem;
+            top: 1.5rem;
+            color: #E5E5E5;
+            /* Platinum Gray */
+            font-size: 1.5rem;
+            cursor: pointer;
+            opacity: 0.7;
+            transition: all 0.3s ease;
+        }
+
+        .close-modal:hover {
+            color: #00F6FF;
+            /* Neon Aqua */
+            opacity: 1;
+        }
+
+        .modal-header {
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(229, 229, 229, 0.1);
+            /* Platinum Gray subtle divider */
+            padding-bottom: 1rem;
+        }
+
+        .modal-title {
+            color: #00F6FF;
+            /* Neon Aqua */
+            font-size: 1.25rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .modal-subtitle {
+            color: #E5E5E5;
+            /* Platinum Gray */
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .modal-price {
+            color: #8F00FF;
+            /* Electric Violet */
+            font-weight: bold;
+            margin-top: 0.5rem;
+        }
+
+        .ticket-control {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: #121212;
+            /* Jet Black */
+            border: 1px solid rgba(143, 0, 255, 0.2);
+            /* Electric Violet */
+            border-radius: 0.5rem;
+        }
+
+        .ticket-label {
+            color: #E5E5E5;
+            /* Platinum Gray */
+            font-weight: 500;
+        }
+
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .quantity-btn {
+            width: 2rem;
+            height: 2rem;
+            border-radius: 50%;
+            background: #8F00FF;
+            /* Electric Violet */
+            color: white;
+            border: none;
+            font-size: 1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .quantity-btn:hover {
+            background: #7A00D9;
+            /* Darker Electric Violet */
+            transform: scale(1.1);
+            box-shadow: 0 0 10px rgba(143, 0, 255, 0.5);
+        }
+
+        .quantity-display {
+            width: 3rem;
+            text-align: center;
+            font-size: 1rem;
+            color: #E5E5E5;
+            /* Platinum Gray */
+            background: transparent;
+            border: none;
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .modal-btn {
+            flex: 1;
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        .modal-btn-cancel {
+            background: transparent;
+            border: 1px solid #FF4F81;
+            /* Sunset Coral */
+            color: #FF4F81;
+            /* Sunset Coral */
+        }
+
+        .modal-btn-cancel:hover {
+            background: rgba(255, 79, 129, 0.1);
+            border-color: #FF4F81;
+            /* Sunset Coral */
+        }
+
+        .modal-btn-submit {
+            background: #8F00FF;
+            /* Electric Violet */
+            border: none;
+            color: white;
+        }
+
+        .modal-btn-submit:hover {
+            background: #7A00D9;
+            box-shadow: 0 0 15px rgba(143, 0, 255, 0.5);
+        }
+
+        /* Animation */
+        @keyframes modalPulse {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .modal-content {
+            animation: modalPulse 0.3s ease-out forwards;
+        }
     </style>
 @endpush
 
@@ -410,7 +604,7 @@
                                 'category' => 'Music Festival',
                                 'price_php' => '₱3,500 - ₱5,200',
                                 'details' => 'Immersive electronic music experience set in a stunning cave environment featuring top DJs from Asia and Europe.',
-                                'image' => asset('images/equation-festival.jpg'),
+                                'image' => asset('https://imgproxy.ra.co/_/rt:fill/h:630/w:1200/quality:50/aHR0cHM6Ly9pbWFnZXMucmEuY28vNDAxY2UzMDI3YTgxZTYxNWI0YzQ4NWQwNzlmMjJmOWFjODY2M2QxYy5wbmc='),
                                 'month' => 'April'
                             ],
                             [
@@ -421,7 +615,7 @@
                                 'category' => 'Jazz Club / Jam Session',
                                 'price_php' => '₱4,800 - ₱12,000',
                                 'details' => 'Asia\'s premier jazz event featuring international jazz legends and emerging artists.',
-                                'image' => asset('images/tokyo-jazz.jpg'),
+                                'image' => asset('https://tokyo-jazz.com/2021/assets/og/og.png'),
                                 'month' => 'May'
                             ],
                             [
@@ -432,7 +626,7 @@
                                 'category' => 'Music Festival',
                                 'price_php' => '₱3,400 - ₱6,800',
                                 'details' => 'Revival of the iconic festival featuring international and local rock acts.',
-                                'image' => asset('images/nano-mugen.jpg'),
+                                'image' => asset('https://th.bing.com/th/id/OIP.ikR2gvnqSEdcDmAqksEA0wHaHZ?rs=1&pid=ImgDetMain'),
                                 'month' => 'May'
                             ],
                             [
@@ -443,7 +637,7 @@
                                 'category' => 'Music Festival',
                                 'price_php' => '₱1,800 - ₱3,600',
                                 'details' => 'Promoting cultural exchanges between Korea and ASEAN countries through popular music.',
-                                'image' => asset('images/round-festival.jpg'),
+                                'image' => asset('https://magazineclonerepub.azureedge.net/mcepub/933/271459/image/bd7c8ca3-4cf9-45d1-a345-2dd8a2fde92e.jpg'),
                                 'month' => 'June'
                             ],
                             [
@@ -454,7 +648,7 @@
                                 'category' => 'Battle of the Bands',
                                 'price_php' => '₱2,500 - ₱4,500',
                                 'details' => 'Showcasing the best independent bands from across Asia with competition elements.',
-                                'image' => asset('images/hk-indie.jpg'),
+                                'image' => asset('https://png.pngtree.com/png-clipart/20230102/original/pngtree-hong-kong-travel-vintage-posters-png-image_8854496.png'),
                                 'month' => 'July'
                             ],
                             [
@@ -465,7 +659,7 @@
                                 'category' => 'Orchestral Performance',
                                 'price_php' => '₱5,200 - ₱15,000',
                                 'details' => 'Three nights of classical masterpieces performed by the Seoul Philharmonic Orchestra.',
-                                'image' => asset('images/seoul-symphony.jpg'),
+                                'image' => asset('https://c8.alamy.com/comp/2PPED4X/musical-festival-poster-classic-orchestra-chamber-symphony-concert-announcement-event-invitation-with-acoustic-instruments-summer-party-garish-2PPED4X.jpg'),
                                 'month' => 'August'
                             ],
                             [
@@ -476,7 +670,7 @@
                                 'category' => 'DJ Set / Club Night',
                                 'price_php' => '₱2,800 - ₱4,200',
                                 'details' => 'Non-stop electronic music across multiple venues featuring top regional DJs.',
-                                'image' => asset('images/bangkok-electronic.jpg'),
+                                'image' => asset('https://p-u.popcdn.net/attachments/images/000/039/980/large/BRF_Poster2.jpg?1670606864'),
                                 'month' => 'August'
                             ],
                             [
@@ -487,7 +681,7 @@
                                 'category' => 'Music Festival',
                                 'price_php' => '₱8,100 - ₱23,800',
                                 'details' => 'A celebration of Asian culture, unity, and diversity featuring top artists.',
-                                'image' => asset('images/one-love-asia.jpg'),
+                                'image' => asset('images/images.jpg'),
                                 'month' => 'October'
                             ],
                             [
@@ -498,7 +692,7 @@
                                 'category' => 'Acoustic Session',
                                 'price_php' => '₱1,500 - ₱3,500',
                                 'details' => 'Intimate performances by renowned acoustic artists from across the region.',
-                                'image' => asset('images/manila-acoustic.jpg'),
+                                'image' => asset('https://img.freepik.com/premium-vector/acoustic-night-poster_584899-1.jpg'),
                                 'month' => 'October'
                             ],
                             [
@@ -509,7 +703,7 @@
                                 'category' => 'Music Festival',
                                 'price_php' => '₱10,000 - ₱18,000',
                                 'details' => 'Asia edition of the renowned hip-hop festival featuring international headliners.',
-                                'image' => asset('images/rolling-loud.jpg'),
+                                'image' => asset('https://www.thailandsun.com/upload/news/rolling-loud-festival-kommt-nach-pattaya-Bild-1.jpg'),
                                 'month' => 'November'
                             ],
                             [
@@ -520,7 +714,7 @@
                                 'category' => 'Music Festival',
                                 'price_php' => 'Free - ₱2,500',
                                 'details' => 'Annual cultural event with performances during cherry blossom season.',
-                                'image' => asset('images/shillong.jpg'),
+                                'image' => asset('https://blogs.tripzygo.in/wp-content/uploads/2024/10/cherry-blossom-festival-in-shillong.jpg'),
                                 'month' => 'November'
                             ],
                             [
@@ -531,7 +725,7 @@
                                 'category' => 'Opera Show',
                                 'price_php' => '₱6,500 - ₱12,800',
                                 'details' => 'Spectacular performances of classic and contemporary operas.',
-                                'image' => asset('images/taipei-opera.jpg'),
+                                'image' => asset('https://desmoinesmetroopera.org/documents/events/fi_354.jpg'),
                                 'month' => 'December'
                             ],
                             [
@@ -542,7 +736,7 @@
                                 'category' => 'Concert',
                                 'price_php' => '₱7,500 - ₱21,000',
                                 'details' => 'Annual year-end celebration featuring top K-pop groups.',
-                                'image' => asset('images/kpop-concert.jpg'),
+                                'image' => asset('https://th.bing.com/th/id/OIP.8XcknQKTfHzVjKqeqdMhYQHaKe?rs=1&pid=ImgDetMain'),
                                 'month' => 'December'
                             ],
                             [
@@ -553,7 +747,7 @@
                                 'category' => 'Dance Party / Rave',
                                 'price_php' => '₱4,500 - ₱8,500',
                                 'details' => 'Countdown to the new year with non-stop electronic music.',
-                                'image' => asset('images/nye-rave.jpg'),
+                                'image' => asset('https://images.squarespace-cdn.com/content/v1/6342275edb5bac2d57b6108a/14d64f8e-fe6d-4c88-98b0-325e13ce356c/new_years_2025_poster.png'),
                                 'month' => 'December'
                             ],
                             [
@@ -564,7 +758,7 @@
                                 'category' => 'Tribute Show',
                                 'price_php' => '₱2,200 - ₱3,800',
                                 'details' => 'Celebrating the music of The Beatles with Asia\'s best tribute band.',
-                                'image' => asset('images/beatles-tribute.jpg'),
+                                'image' => asset('https://d1csarkz8obe9u.cloudfront.net/posterpreviews/the-beatles-tribute-event-design-template-af09845602525a21037679b955e080e2_screen.jpg?ts=1698420555'),
                                 'month' => 'January'
                             ],
                             [
@@ -575,7 +769,7 @@
                                 'category' => 'Music Award Ceremony',
                                 'price_php' => '₱12,000 - ₱25,000',
                                 'details' => 'The most prestigious music awards ceremony in Asia.',
-                                'image' => asset('images/asian-awards.jpg'),
+                                'image' => asset('https://data.ibtimes.sg/en/full/44768/mnet-live-stream.jpg'),
                                 'month' => 'February'
                             ]
                         ])->sortBy(function ($event) {
@@ -591,8 +785,6 @@
 
                     @foreach($events as $event)
                         @php
-                            // Parse date using DateTime for accuracy
-                            // We'll use the first date in the range for the separator
                             $dateString = preg_replace('/-.*,/', ',', $event['dates']);
                             $eventDate = DateTime::createFromFormat('F j, Y', $dateString);
                             $eventYear = $eventDate->format('Y');
@@ -616,8 +808,8 @@
                         <div class="browse-event-card" data-category="{{ $event['category'] }}"
                             data-price="{{ strpos($event['price_php'], 'Free') !== false ? 'free' : 'paid' }}"
                             data-price-range="{{ $event['price_php'] }}" data-month="{{ $currentMonth }}"
-                            data-year="{{ $currentYear }}" data-venue="{{ $event['venue'] }}">
-
+                            data-year="{{ $currentYear }}" data-venue="{{ $event['venue'] }}" data-event-id="{{ $event['id'] }}"
+                            data-event-title="{{ $event['title'] }}" data-event-price="{{ $event['price_php'] }}">
                             <div class="browse-event-img-container">
                                 @if ($event['image'])
                                     <img src="{{ $event['image'] }}" alt="{{ $event['title'] }}" class="browse-event-img">
@@ -652,72 +844,141 @@
                 </div>
             </div>
         </div>
-    </div>
+
+        <!-- Ticket Selection Modal -->
+        <div class="modal" id="ticketModal"
+            style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.6); z-index:1000; justify-content:center; align-items:center;">
+            <div class="modal-content bg-white rounded-lg shadow-lg max-w-md mx-auto p-6 relative">
+                <button id="modalCloseBtn"
+                    class="absolute top-3 right-3 text-gray-700 hover:text-gray-900 text-xl font-bold">&times;</button>
+                <h2 id="modalEventTitle" class="text-xl font-semibold mb-4">Select Ticket Quantity</h2>
+
+                <form id="addToCartForm" method="POST" action="{{ route('cart.add') }}">
+                    @csrf
+                    <input type="hidden" name="event_id" id="modalEventId" value="">
+
+                    <div class="mb-4">
+                        <label for="ticketQuantity" class="block text-gray-700 font-medium mb-1">Tickets</label>
+                        <select name="quantity" id="ticketQuantity" class="border border-gray-300 rounded px-3 py-2 w-full">
+                            @for ($i = 1; $i <= 10; $i++)
+                                <option value="{{ $i }}">{{ $i }}</option>
+                            @endfor
+                        </select>
+                    </div>
+
+                    <div class="mb-4">
+                        <p id="modalEventPrice" class="text-gray-800 font-semibold"></p>
+                    </div>
+
+                    <div class="flex justify-end space-x-4">
+                        <button type="button" id="modalCancelBtn"
+                            class="px-4 py-2 rounded border border-gray-300 hover:bg-gray-100">Cancel</button>
+                        <button type="submit" class="px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700">Add to
+                            Cart</button>
+                    </div>
+                </form>
+            </div>
+        </div>
 
 
-    <!-- Toast Notification -->
-    <div class="toast-notification" id="toastNotification">
-        Event added to cart!
-    </div>
+        <!-- Toast Notification -->
+        <div class="toast-notification" id="toastNotification">
+            Event added to cart!
+        </div>
     </div>
     </div>
 
     @push('scripts')
         <script>
-            document.addEventListener('DOMContentLoaded', function () {
-                // Cart functionality
-                @auth
-                                        const addToCartButtons = document.querySelectorAll('.add-to-cart');
-                    const toastNotification = document.getElementById('toastNotification');
-                    let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+            document.addEventListener('DOMContentLoaded', () => {
+                const addToCartButtons = document.querySelectorAll('.add-to-cart');
+                const modal = document.getElementById('ticketModal');
+                const modalCloseBtn = document.getElementById('modalCloseBtn');
+                const modalCancelBtn = document.getElementById('modalCancelBtn');
+                const modalEventTitle = document.getElementById('modalEventTitle');
+                const modalEventId = document.getElementById('modalEventId');
+                const modalEventPrice = document.getElementById('modalEventPrice');
+                const toast = document.getElementById('toast');
+                const addToCartForm = document.getElementById('addToCartForm');
 
-                    addToCartButtons.forEach(button => {
-                        button.addEventListener('click', function () {
-                            const eventId = this.getAttribute('data-event-id');
-                            const eventTitle = this.getAttribute('data-event-title');
-                            const eventPrice = this.getAttribute('data-event-price');
+                addToCartButtons.forEach(button => {
+                    button.addEventListener('click', () => {
+                        const eventId = button.getAttribute('data-event-id');
+                        const eventTitle = button.getAttribute('data-event-title');
+                        const eventPrice = button.getAttribute('data-event-price');
 
-                            const existingItem = cartItems.find(item => item.id === eventId);
+                        modalEventTitle.textContent = `Select Ticket Quantity for "${eventTitle}"`;
+                        modalEventId.value = eventId;
+                        modalEventPrice.textContent = `Price Range: ${eventPrice}`;
 
-                            if (!existingItem) {
-                                cartItems.push({
-                                    id: eventId,
-                                    title: eventTitle,
-                                    price: eventPrice,
-                                    quantity: 1
-                                });
-
-                                localStorage.setItem('cartItems', JSON.stringify(cartItems));
-                                this.textContent = 'Added to Cart';
-                                this.classList.add('added');
-                                showToast('Event added to cart!');
-                                updateCartCount();
-                            } else {
-                                showToast('This event is already in your cart');
-                            }
-                        });
+                        modal.style.display = 'flex';
+                        document.body.style.overflow = 'hidden';  // Prevent background scroll when modal open
                     });
+                });
 
-                    function showToast(message) {
-                        toastNotification.textContent = message;
-                        toastNotification.classList.add('show');
-                        setTimeout(() => {
-                            toastNotification.classList.remove('show');
-                        }, 3000);
+                const closeModal = () => {
+                    modal.style.display = 'none';
+                    document.body.style.overflow = '';
+                    addToCartForm.reset();
+                };
+
+                modalCloseBtn.addEventListener('click', closeModal);
+                modalCancelBtn.addEventListener('click', closeModal);
+
+                // Optional: close modal when clicking outside modal-content
+                window.addEventListener('click', (event) => {
+                    if (event.target === modal) {
+                        closeModal();
                     }
+                });
 
-                    function updateCartCount() {
-                        const cartBadge = document.querySelector('.cart-badge');
-                        if (cartBadge) {
-                            cartBadge.textContent = cartItems.length;
-                        }
-                    }
+                // Handle Add to Cart form submission via AJAX or default form submit
+                addToCartForm.addEventListener('submit', function (event) {
+                    event.preventDefault();
 
-                    updateCartCount();
-                @endauth
+                    const formData = new FormData(addToCartForm);
+                    fetch(addToCartForm.action, {
+                        method: 'POST',
+                        headers: {
+                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                            'Accept': 'application/json',
+                        },
+                        body: formData,
+                    })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.success) {
+                                closeModal();
+                                showToast('Item added to cart!');
+                            } else if (data.error) {
+                                alert('Error: ' + data.error);
+                            } else {
+                                alert('Unexpected error occurred.');
+                            }
+                        })
+                        .catch(error => {
+                            alert('Error adding item to cart.');
+                            console.error('Add to cart error:', error);
+                        });
+                });
 
-                                // Filter functionality with stats update
-                                const categoryFilter = document.getElementById('categoryFilter');
+                function showToast(message) {
+                    toast.textContent = message;
+                    toast.classList.remove('hidden');
+                    setTimeout(() => {
+                        toast.classList.add('hidden');
+                    }, 3000);
+                }
+
+                function updateCartCount(count) {
+                    const cartBadges = document.querySelectorAll('.cart-badge');
+                    cartBadges.forEach(badge => {
+                        badge.textContent = count;
+                    });
+                }
+
+                // Filter functionality with stats update
+                const categoryFilter = document.getElementById('categoryFilter');
                 const priceFilter = document.getElementById('priceFilter');
                 const eventCards = document.querySelectorAll('.browse-event-card');
                 const monthSeparators = document.querySelectorAll('.month-separator');

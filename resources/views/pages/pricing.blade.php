@@ -654,7 +654,7 @@
         <div class="pricing-container">
             <!-- Header -->
             <div class="pricing-header">
-                <h2 class="pricing-title">Pricing</h2>
+                <h2 class="pricing-title">Subscription</h2>
                 <p class="pricing-subtitle">
                     Simple, transparent pricing that grows with your needs
                 </p>

@@ -65,4 +65,11 @@ public function activities()
 {
     return $this->hasMany(UserActivity::class)->latest();
 }
+
+// If you need both relationships, rename one of them, for example:
+public function wishlistItems()
+{
+    return $this->hasMany(Wishlist::class);
+}
+
 }

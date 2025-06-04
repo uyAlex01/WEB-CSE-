@@ -1,124 +1,111 @@
 <?php
-
+// app/Http/Controllers/CartController.php
 namespace App\Http\Controllers;
 
-use App\Models\Cart;
-use App\Models\Event;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
 {
-    /**
-     * Add an event to the user's cart.
-     */
-    public function addToCart(Request $request)
-{
-    $validated = $request->validate([
-        'event_id' => 'required|exists:events,id',
-        'quantity' => 'required|integer|min:1|max:10'
-    ]);
-
-    $event = Event::findOrFail($request->event_id);
-
-    // Check ticket availability
-    if ($event->available_tickets < $request->quantity) {
-        return back()->with('error', 'Not enough tickets available!');
+    public function viewcart()
+    {
+        $cartItems = session()->get('cart', []);
+        
+        // Calculate totals
+        $subtotal = $this->calculateSubtotal($cartItems);
+        $serviceFee = $this->calculateServiceFee($subtotal);
+        $total = $subtotal + $serviceFee;
+        
+        return view('pages.cart', [
+            'cartItems' => $cartItems,
+            'subtotal' => $this->formatPrice($subtotal),
+            'serviceFee' => $this->formatPrice($serviceFee),
+            'total' => $this->formatPrice($total)
+        ]);
     }
-
-    // Add to cart (for authenticated users)
-    if (Auth::check()) {
-        $cartItem = Cart::updateOrCreate(
-            ['user_id' => Auth::id(), 'event_id' => $event->id],
-            ['quantity' => \DB::raw("quantity + {$request->quantity}")]
-        );
-    } 
-    // For guests (store in session)
-    else {
+    
+    public function addToCart(Request $request)
+    {
+        $eventId = $request->input('event_id');
+        $event = $this->getEventData($eventId);
+        
+        if (!$event) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Event not found',
+                'cart_count' => count(session('cart', []))
+            ]);
+        }
+        
         $cart = session()->get('cart', []);
         
-        if (isset($cart[$event->id])) {
-            $cart[$event->id]['quantity'] += $request->quantity;
-        } else {
-            $cart[$event->id] = [
-                "event_id" => $event->id,
-                "name" => $event->name,
-                "price" => $event->price,
-                "quantity" => $request->quantity,
-                "image" => $event->image
-            ];
+        // Check if item already exists in cart
+        if (isset($cart[$eventId])) {
+            return response()->json([
+                'success' => false,
+                'message' => 'This event is already in your cart',
+                'cart_count' => count($cart)
+            ]);
         }
+        
+        // Add new item to cart
+        $cart[$eventId] = [
+            'id' => $event['id'],
+            'title' => $event['title'],
+            'price' => $event['price_php'],
+            'image' => $event['image'],
+            'dates' => $event['dates'],
+            'venue' => $event['venue']
+        ];
         
         session()->put('cart', $cart);
+        
+        return response()->json([
+            'success' => true,
+            'message' => 'Event added to cart!',
+            'cart_count' => count($cart)
+        ]);
     }
-
-    return redirect()->route('cart.view')->with('success', 'Event added to cart!');
-}
-
-    /**
-     * Show the cart page with all items.
-     */
-    public function viewCart()
-{
-    $cartItems = [];
-    $subtotal = 0;
-
-    // For authenticated users
-    if (Auth::check()) {
-        $cartItems = Auth::user()->carts()->with('event')->get();
-        $subtotal = $cartItems->sum(function($item) {
-            return $item->event->price * $item->quantity;
-        });
-    } 
-    // For guests
-    else {
+    
+    public function removeFromCart(Request $request, $id)
+    {
         $cart = session()->get('cart', []);
-        foreach ($cart as $id => $details) {
-            $event = Event::find($id);
-            if ($event) {
-                $cartItems[] = (object)[
-                    'event' => $event,
-                    'quantity' => $details['quantity']
-                ];
-                $subtotal += $event->price * $details['quantity'];
-            }
+        
+        if (isset($cart[$id])) {
+            unset($cart[$id]);
+            session()->put('cart', $cart);
         }
+        
+        return redirect('/cart')->with('success', 'Item removed from cart');
     }
-
-    $serviceFee = max(100, $subtotal * 0.1); // 10% or min 100
-    $total = $subtotal + $serviceFee;
-
-    return view('pages.cart', [
-    'total' => '₱' . number_format($total, 2)
-]);
-
-}
-
-    /**
-     * Remove a single event from the cart.
-     */
-    public function removeFromCart($eventId)
+    
+    // Helper methods
+    private function calculateSubtotal($items)
     {
-        if (!Auth::check()) {
-            return redirect()->route('login');
+        $subtotal = 0;
+        foreach ($items as $item) {
+            $priceStr = $item['price'];
+            $price = (float)preg_replace('/[^0-9.]/', '', explode('-', $priceStr)[0]);
+            $subtotal += $price;
         }
-
-        Auth::user()->carts()->where('event_id', $eventId)->delete();
-
-        return back()->with('success', 'Event removed from cart!');
+        return $subtotal;
     }
-
-    /**
-     * Clear the user's entire cart.
-     */
-    public function clearCart()
+    
+    private function calculateServiceFee($subtotal)
     {
-        if (!Auth::check()) {
-            return redirect()->route('login');
-        }
-
-        Auth::user()->carts()->delete();
-
-        return back()->with('success', 'Cart cleared!');
+        return $subtotal * 0.1; // 10% service fee
+    }
+    
+    private function formatPrice($amount)
+    {
+        return '₱' . number_format($amount, 2);
+    }
+    
+    private function getEventData($id)
+    {
+        $events = [
+            // Your events array from browse.blade.php
+        ];
+        
+        return collect($events)->firstWhere('id', $id);
     }
 }

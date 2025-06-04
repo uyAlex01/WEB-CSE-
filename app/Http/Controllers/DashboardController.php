@@ -76,7 +76,7 @@ class DashboardController extends Controller
             
             // Cart/Wishlist Counts
             'cartCount' => $user->cartItems()->count(),
-            'wishlistCount' => $user->wishlist()->count()
+            
         ]);
     }
 

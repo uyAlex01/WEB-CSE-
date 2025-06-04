@@ -69,44 +69,45 @@ Route::controller(CategoryController::class)->group(function () {
 |--------------------------------------------------------------------------
 */
 Route::middleware('auth')->group(function () {
+
     // Dashboard
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    
+
     // Event Routes
     Route::controller(EventController::class)->group(function () {
         Route::get('/events/upcoming', 'upcoming')->name('events.upcoming');
         Route::get('/events/attended', 'attended')->name('events.attended');
     });
-    
+
     // Cart Routes
     Route::prefix('cart')->controller(CartController::class)->group(function () {
-        Route::get('/', 'viewCart')->name('cart.view');
+        Route::get('/', 'viewcart')->name('cart.view');                 // Use your updated method name
         Route::post('/add', 'addToCart')->name('cart.add');
         Route::post('/remove/{id}', 'removeFromCart')->name('cart.remove');
-        Route::post('/update/{id}', 'updateCart')->name('cart.update');
-        Route::post('/clear', 'clearCart')->name('cart.clear');
+        // Add more routes if you implement updateCart, clearCart, etc.
     });
-    
+
     // Checkout Routes
     Route::prefix('checkout')->controller(CheckoutController::class)->group(function () {
         Route::get('/', 'index')->name('checkout');
         Route::post('/process', 'process')->name('checkout.process');
         Route::get('/success', 'success')->name('checkout.success');
     });
-    
+
     // Ticket Routes
     Route::prefix('tickets')->controller(TicketController::class)->group(function () {
         Route::get('/', 'index')->name('tickets.index');
         Route::get('/{ticket}', 'show')->name('tickets.show');
     });
-    
+
     // Order Routes
     Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
-    
+
     // Wishlist Routes
     Route::get('/wishlist', [WishlistController::class, 'index'])->name('wishlist.index');
-    
-    // API Routes
+    Route::post('/wishlist/remove/{id}', [WishlistController::class, 'remove'])->name('wishlist.remove');
+
+    // API Routes (for dashboard stats)
     Route::prefix('api')->group(function () {
         Route::get('/dashboard-stats', [DashboardController::class, 'getStats'])->name('api.dashboard.stats');
     });
@@ -117,25 +118,17 @@ Route::middleware('auth')->group(function () {
 | Public API Routes
 |--------------------------------------------------------------------------
 */
-Route::get('/cart/count', function() {
+Route::get('/cart/count', function () {
     return response()->json([
-        'count' => Auth::check() ? Auth::user()->cartItems()->count() : 0
+        'count' => Auth::check() ? Auth::user()->cartItems()->count() : 0,
     ]);
 });
 
-// Temporary debug route (add to routes/web.php)
-Route::get('/debug-cart', function() {
+// Temporary debug route
+Route::get('/debug-cart', function () {
     dd([
         'Session Cart' => session()->get('cart'),
         'DB Cart (Auth)' => Auth::check() ? Auth::user()->carts : null,
-        'Event Data' => Event::first() // Verify event exists
+        'Event Data' => \App\Models\Event::first(), // Verify event exists
     ]);
 });
-
-Route::patch('/cart/update/{eventId}', [CartController::class, 'updateQuantity']);
-
-// Show cart page
-Route::get('/cart', [CartController::class, 'viewCart'])->name('cart.view');
-
-// Add to cart (POST)
-Route::post('/add-to-cart', [CartController::class, 'addToCart'])->name('cart.add');

@@ -794,8 +794,10 @@
                 <div class="ticket-list">
                     @forelse($upcomingTickets as $ticket)
                             <div onclick="window.location.href='{{ route('tickets.show', ['ticket' => $ticket['id']]) }}'>
-                                                                                        <div class=" ticket-image">
-                                {{ $ticket['icon'] }}</div>
+                                                                                                                                        <div class="
+                                ticket-image">
+                                {{ $ticket['icon'] }}
+                            </div>
                             <div class="ticket-info">
                                 <h4 class="ticket-title">{{ $ticket['event'] }}</h4>
                                 <div class="ticket-date">{{ \Carbon\Carbon::parse($ticket['date'])->format('l, F j, Y') }}</div>
@@ -825,7 +827,7 @@
                     <a href="{{ route('events.browse') }}" class="action-btn">
                         🔍 Browse Events
                     </a>
-                    <a href="{{ route('cart.view') }}" class="action-btn">
+                    <a href="{{ route('cart') }}" class="action-btn">
                         🛒 View Cart
                         @if($cartCount > 0)
                             <span class="notification-badge">{{ $cartCount }}</span>
@@ -836,9 +838,10 @@
                     </a>
                     <a href="{{ route('wishlist.index') }}" class="action-btn">
                         ⭐ Wishlist
-                        @if($wishlistCount > 0)
-                            <span class="notification-badge">{{ $wishlistCount }}</span>
+                        @if(isset($wishlistCount) && $wishlistCount > 0)
+                            {{ $wishlistCount }}
                         @endif
+
                     </a>
                 </div>
             </div>
